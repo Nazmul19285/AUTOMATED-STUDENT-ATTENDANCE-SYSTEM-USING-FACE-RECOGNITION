@@ -29,6 +29,12 @@ while(True):
             h = ap.readline()
         classDates = h.split(",")
 
+        c = 0
+        for x in classDates:
+            c += 1
+        
+        c = 10/c
+
 
         dateCounter = 0
         for x in classDates:
@@ -36,7 +42,10 @@ while(True):
                 break
             dateCounter += 1
 
-
+        j = -1
+        for x in classDates:
+            j += 1
+            
         y = 1
         for x in students:
             if(name == x):
@@ -44,7 +53,7 @@ while(True):
                 lines = list(r)
                 if(lines[y][dateCounter] == '0'):
                     lines[y][dateCounter] = '1'
-                    lines[y][7] = str(float(lines[y][3])+1.7)
+                    lines[y][j] = str(float(lines[y][j])+c)
                     writer = csv.writer(open(atendancePath, 'w'))
                     writer.writerows(lines)
             y += 1
@@ -103,6 +112,7 @@ while(True):
 
     today= datetime.now()
     today = today.strftime("%A")
+    #print(today)
 
     todayDate = datetime.date(datetime.now())
     todayDate = todayDate.strftime("%d %b %Y")
@@ -118,6 +128,7 @@ while(True):
         cv.imshow("Frame", frame)
         if cv.waitKey(25) & 0xFF == ord('q'):
             break
+        #break
     video_capture.release()
     cv.destroyAllWindows()
 
@@ -155,6 +166,7 @@ while(True):
                 durationCounter += 1
 
         rowCounter +=1
+        #print(path,atendancePath)
 
     find_target_faces()
     render_image()
